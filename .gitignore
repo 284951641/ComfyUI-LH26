@@ -1,0 +1,13 @@
+# Python cache/build output
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+
+# Local models and temporary files
+models/
+*.download
+.validation_cache.json
+.DS_Store
