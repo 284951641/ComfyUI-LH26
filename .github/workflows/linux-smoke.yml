@@ -1,0 +1,26 @@
+name: Linux ComfyUI smoke test
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install CPU PyTorch
+        run: python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+      - name: Check out RunningHub-compatible ComfyUI
+        run: git clone --depth 1 --branch v0.3.68 https://github.com/Comfy-Org/ComfyUI.git ComfyUI
+      - name: Install ComfyUI and node dependencies
+        run: |
+          python -m pip install -r ComfyUI/requirements.txt
+          python -m pip install -r requirements.txt
+      - name: Import all LH2.6 nodes and build schemas
+        run: python tests/smoke_linux.py "$GITHUB_WORKSPACE/ComfyUI"

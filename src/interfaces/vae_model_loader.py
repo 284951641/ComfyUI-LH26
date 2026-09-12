@@ -32,7 +32,7 @@ class LH26LoadVAEModel(io.ComfyNode):
         
         return io.Schema(
             node_id="LH26LoadVAEModel",
-            display_name="LH2.6 (Down)Load VAE Model",
+            display_name="LH2.6 Load VAE Model",
             category="LH2.6",
             description=(
                 "Load and configure LH2.6 VAE (Variational Autoencoder) for encoding/decoding video frames to/from latent space. "

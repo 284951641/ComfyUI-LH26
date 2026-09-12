@@ -18,7 +18,6 @@ MODEL_CLASSES = {
 
 @dataclass
 class ModelInfo:
-    repo: Optional[str] = None
     category: str = "dit"
     precision: str = "bf16"
     size: str = "3B"
@@ -41,10 +40,6 @@ DEFAULT_VAE = "lh26_vae_bf16.safetensors"
 
 def get_default_models(category: str) -> List[str]:
     return [name for name, info in MODEL_REGISTRY.items() if info.category == category]
-
-def get_model_repo(model_name: str) -> Optional[str]:
-    info = MODEL_REGISTRY.get(model_name)
-    return info.repo if info else None
 
 def get_available_dit_models() -> List[str]:
     return get_default_models("dit")

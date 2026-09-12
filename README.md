@@ -4,8 +4,8 @@ LH2.6 视频增强节点，适配标准 ComfyUI（Linux/Windows）及 RunningHub
 
 ## 节点
 
-- `LH2.6 (Down)Load DiT Model`
-- `LH2.6 (Down)Load VAE Model`
+- `LH2.6 Load DiT Model`
+- `LH2.6 Load VAE Model`
 - `LH2.6 Video Upscaler`
 - `LH2.6 Torch Compile Settings`（可选）
 

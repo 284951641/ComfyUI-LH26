@@ -147,25 +147,12 @@ class Debug:
         original_timestamps = self.show_timestamps
         self.show_timestamps = False
         
-        # ASCII art logo
+        # Compact public package header. Keep implementation provenance in the
+        # source license headers rather than presenting it as product branding.
         self.log("", category="none", force=True)
-        self.log("", category="none", force=True)
-        self.log("███████╗███████╗███████╗██████╗ ██╗   ██╗██████╗     ██████╗       ███████╗", category="none", force=True, indent_level=1)
-        self.log("██╔════╝██╔════╝██╔════╝██╔══██╗██║   ██║██╔══██╗    ╚════██╗      ██╔════╝", category="none", force=True, indent_level=1)
-        self.log("███████╗█████╗  █████╗  ██║  ██║██║   ██║██████╔╝     █████╔╝      ███████╗", category="none", force=True, indent_level=1)
-        self.log("╚════██║██╔══╝  ██╔══╝  ██║  ██║╚██╗ ██╔╝██╔══██╗    ██╔═══╝       ╚════██║", category="none", force=True, indent_level=1)
-        self.log("███████║███████╗███████╗██████╔╝ ╚████╔╝ ██║  ██║    ███████╗  ██╗ ███████║", category="none", force=True, indent_level=1)
-        self.log("╚══════╝╚══════╝╚══════╝╚═════╝   ╚═══╝  ╚═╝  ╚═╝    ╚══════╝  ╚═╝ ╚══════╝", category="none", force=True, indent_level=1)
-        # Version and credits - left/right aligned to logo width
-        version_text = f"v{__version__}"
         cli_indicator = "💻 CLI · " if cli else ""
-        left_part = f"{cli_indicator}{version_text}"
-        right_part = "© ByteDance Seed · NumZ · AInVFX"
-        logo_width = 75
-        emoji_compensation = 1 if cli else 0
-        padding = logo_width - len(left_part) - len(right_part) - emoji_compensation
-        self.log(f"{left_part}{' ' * max(1, padding)}{right_part}", category="none", force=True, indent_level=1)
-        self.log("━" * logo_width, category="none", force=True, indent_level=1)
+        self.log(f"{cli_indicator}LH2.6 · v{__version__}", category="none", force=True, indent_level=1)
+        self.log("━" * 32, category="none", force=True, indent_level=1)
         self.log("", category="none", force=True)
         
         # Restore timestamps setting
@@ -260,7 +247,6 @@ class Debug:
         self.log("", category="none", force=True)
         self.log("────────────────────────", category="none", force=True)
         self.log("Questions? Updates? Watch, star & sponsor if you can!", category="dialogue", force=True)
-        self.log("https://www.youtube.com/@AInVFX", category="generation", force=True)
         self.log("LH2.6", category="lh26", force=True)
     
     @torch._dynamo.disable  # Skip tracing to avoid time.time() warnings

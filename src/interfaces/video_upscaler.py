@@ -7,7 +7,7 @@ import torch
 from comfy_api.latest import io
 from typing import Tuple, Dict, Any, Optional
 from ..utils.constants import get_base_cache_dir, __version__
-from ..utils.downloads import download_weight
+from ..utils.model_validation import validate_required_models
 from ..utils.debug import Debug
 from ..core.generation_phases import (
     encode_all_batches, 
@@ -390,7 +390,7 @@ class LH26VideoUpscaler(io.ComfyNode):
 
         # Verify the separately installed model files.
         debug.log("Checking LH2.6 model files...", category="download")
-        if not download_weight(dit_model=dit_model, vae_model=vae_model, debug=debug):
+        if not validate_required_models(dit_model=dit_model, vae_model=vae_model, debug=debug):
             raise RuntimeError(
                 f"Required LH2.6 model files are missing or invalid. "
                 f"DiT model: {dit_model}, VAE model: {vae_model}. "

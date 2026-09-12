@@ -21,11 +21,8 @@ K_SCALE_SIZE = 12
 GGUF_BLOCK_SIZE = 32
 GGUF_TYPE_SIZE = 64
 
-# Download configuration
-HUGGINGFACE_BASE_URL = "https://huggingface.co/{repo}/resolve/main/{filename}"
-DOWNLOAD_CHUNK_SIZE = 8192 * 1024  # 8MB chunks for hash calculation
-DOWNLOAD_MAX_RETRIES = 3
-DOWNLOAD_RETRY_DELAY = 2  # seconds
+# Hashing configuration
+DOWNLOAD_CHUNK_SIZE = 8192 * 1024
 
 def get_script_directory() -> str:
     """Get the root script directory path (3 levels up from this file)"""

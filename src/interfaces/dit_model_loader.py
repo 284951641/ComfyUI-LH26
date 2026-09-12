@@ -31,7 +31,7 @@ class LH26LoadDiTModel(io.ComfyNode):
         
         return io.Schema(
             node_id="LH26LoadDiTModel",
-            display_name="LH2.6 (Down)Load DiT Model",
+            display_name="LH2.6 Load DiT Model",
             category="LH2.6",
             description=(
                 "Load and configure LH2.6 DiT (Diffusion Transformer) model for video upscaling. "
