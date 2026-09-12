@@ -11,7 +11,7 @@ from pathlib import Path
 
 def main() -> None:
     repo = Path(__file__).resolve().parents[1]
-    comfy = Path(sys.argv[1]).resolve()
+    comfy = Path(sys.argv[1] if len(sys.argv) > 1 else "ComfyUI").resolve()
     sys.path.insert(0, str(comfy))
 
     spec = importlib.util.spec_from_file_location(
