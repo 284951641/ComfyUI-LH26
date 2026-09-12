@@ -49,6 +49,7 @@ def main() -> None:
 try:
     main()
 except Exception as exc:
-    detail = " ".join(traceback.format_exception_only(type(exc), exc)).strip()
+    detail = traceback.format_exc().replace("\n", " | ")
+    detail = detail[-4000:]
     print(f"::error file=tests/smoke_linux.py,line=1::{detail}")
     raise
