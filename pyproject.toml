@@ -24,6 +24,7 @@ dependencies = [
 ]
 
 [tool.comfy]
-PublisherId = "lhstarlight26"
+PublisherId = "lh26"
 DisplayName = "ComfyUI-LH2.6"
 includes = []
+
