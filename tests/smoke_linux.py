@@ -6,6 +6,7 @@ import asyncio
 import importlib.util
 import json
 import sys
+import traceback
 from pathlib import Path
 
 repo = Path(__file__).resolve().parents[1]
@@ -21,7 +22,14 @@ if spec is None or spec.loader is None:
     raise RuntimeError("Cannot create LH2.6 package spec")
 module = importlib.util.module_from_spec(spec)
 sys.modules[spec.name] = module
-spec.loader.exec_module(module)
+try:
+    spec.loader.exec_module(module)
+except Exception as exc:
+    # Emit the actual import error as a public Actions annotation; this keeps
+    # failures diagnosable even when job-log download is restricted.
+    detail = " ".join(traceback.format_exception_only(type(exc), exc)).strip()
+    print(f"::error file=tests/smoke_linux.py,line=1::{detail}")
+    raise
 
 extension = asyncio.run(module.comfy_entrypoint())
 nodes = asyncio.run(extension.get_node_list())
