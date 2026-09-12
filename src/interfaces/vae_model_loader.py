@@ -27,7 +27,9 @@ class LH26LoadVAEModel(io.ComfyNode):
     
     @classmethod
     def define_schema(cls) -> io.Schema:        
-        devices = get_device_list()
+        # Keep schema construction valid on CPU-only CI/hosts; GPU devices are
+        # still preferred whenever ComfyUI exposes them.
+        devices = get_device_list() or ["cpu"]
         vae_models = get_available_vae_models()
         
         return io.Schema(

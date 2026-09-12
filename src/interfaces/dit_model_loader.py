@@ -26,7 +26,9 @@ class LH26LoadDiTModel(io.ComfyNode):
     
     @classmethod
     def define_schema(cls) -> io.Schema:        
-        devices = get_device_list()
+        # Keep schema construction valid on CPU-only CI/hosts; GPU devices are
+        # still preferred whenever ComfyUI exposes them.
+        devices = get_device_list() or ["cpu"]
         dit_models = get_available_dit_models()
         
         return io.Schema(
