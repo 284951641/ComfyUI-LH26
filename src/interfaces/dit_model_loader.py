@@ -45,7 +45,7 @@ class LH26LoadDiTModel(io.ComfyNode):
                     default=DEFAULT_DIT,
                     tooltip=(
                         "DiT (Diffusion Transformer) model for video upscaling.\n"
-                        "Install the reviewed model in ComfyUI/models/LH2.6/."
+                        "Install the reviewed model through RunningHub (UNet) or in ComfyUI/models/LH2.6/."
                     )
                 ),
                 io.Combo.Input("device",

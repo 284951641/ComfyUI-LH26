@@ -33,19 +33,23 @@ lh26_dit_3b_bf16.safetensors
 lh26_vae_bf16.safetensors
 ```
 
-平台安装位置：
+节点会同时搜索 RunningHub 常用的 `unet` 目录和标准 ComfyUI 目录：
 
 ```text
 ComfyUI/models/LH2.6/lh26_dit_3b_bf16.safetensors
 ComfyUI/models/LH2.6/lh26_vae_bf16.safetensors
+ComfyUI/models/unet/lh26_dit_3b_bf16.safetensors
+ComfyUI/models/unet/lh26_vae_bf16.safetensors
 ```
+
+如果 RunningHub 上传页只有 `UNet` 类型，两个文件都选择 `UNet` 即可；节点会自动在该目录找到它们。
 
 `pos_emb.pt` 和 `neg_emb.pt` 体积很小，已随节点包提供。
 
 ## RunningHub
 
 1. 向 RunningHub 提交本 GitHub 仓库链接审核节点。
-2. 单独提交两个模型文件审核/上传。
+2. 单独提交两个模型文件审核/上传（上传页只有 `UNet` 时两个都选 `UNet`）。
 3. 审核收录后，导入 `example_workflows/LH2.6-RunningHub-video.json`。
 4. 上传输入视频并运行。
 

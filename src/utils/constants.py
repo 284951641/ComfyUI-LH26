@@ -52,34 +52,42 @@ def get_base_cache_dir() -> str:
 
 
 def get_all_model_paths() -> list:
-    """Get all registered model paths including those from extra_model_paths.yaml (case-insensitive)"""
+    """Return LH2.6 plus standard ComfyUI/RunningHub model directories.
+
+    RunningHub's model uploader commonly places custom weights in ``unet`` (or
+    newer ComfyUI's ``diffusion_models``) instead of a custom node directory,
+    so both standard locations are searched as well as ``models/LH2.6``.
+    """
     try:
         import folder_paths
-        # Ensure default path is registered first
         get_base_cache_dir()
-        
-        # Case-insensitive lookup: search through all registered folder types
-        # This handles any case variation users might use in extra_model_paths.yaml
         all_paths = []
-        target_lower = LH26_MODEL_TYPE.lower()
-        
-        # folder_paths.folder_names_and_paths is the underlying dict: {type: ([paths], extensions)}
+        accepted_types = {LH26_MODEL_TYPE, "unet", "diffusion_models", "vae"}
+
         if hasattr(folder_paths, 'folder_names_and_paths'):
             for folder_type, (paths, _) in folder_paths.folder_names_and_paths.items():
-                if folder_type.lower() == target_lower:
+                if folder_type.lower() in accepted_types:
                     all_paths.extend(paths)
-        
-        # Remove duplicates while preserving order (os.path.normpath handles Windows/Linux path differences)
+
+        # Include conventional directories even when an older ComfyUI version
+        # has not registered every alias in folder_names_and_paths.
+        all_paths.extend([
+            os.path.join(folder_paths.models_dir, LH26_FOLDER_NAME),
+            os.path.join(folder_paths.models_dir, "unet"),
+            os.path.join(folder_paths.models_dir, "diffusion_models"),
+            os.path.join(folder_paths.models_dir, "vae"),
+        ])
+
         seen = set()
         unique_paths = []
         for path in all_paths:
-            normalized = os.path.normpath(path.lower())
+            normalized = os.path.normcase(os.path.normpath(path))
             if normalized not in seen:
                 seen.add(normalized)
                 unique_paths.append(path)
-        
+
         return unique_paths if unique_paths else [get_base_cache_dir()]
-    except:
+    except Exception:
         return [get_base_cache_dir()]
 
 

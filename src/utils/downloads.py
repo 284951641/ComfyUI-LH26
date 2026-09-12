@@ -240,7 +240,7 @@ def download_weight(dit_model: str, vae_model: str, model_dir: Optional[str] = N
             if debug:
                 debug.log(
                     f"Missing {model_type} model: {filename}. "
-                    f"Place it in ComfyUI/models/LH2.6/.",
+                    f"Upload it as UNet on RunningHub or place it in ComfyUI/models/LH2.6/.",
                     level="ERROR", category="setup", force=True,
                 )
             return False

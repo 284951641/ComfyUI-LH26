@@ -46,7 +46,7 @@ class LH26LoadVAEModel(io.ComfyNode):
                     default=DEFAULT_VAE,
                     tooltip=(
                         "VAE (Variational Autoencoder) model for encoding/decoding.\n"
-                        "Install the reviewed model in ComfyUI/models/LH2.6/."
+                        "Install the reviewed model through RunningHub (UNet) or in ComfyUI/models/LH2.6/."
                     )
                 ),
                 io.Combo.Input("device",

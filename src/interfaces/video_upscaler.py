@@ -394,7 +394,7 @@ class LH26VideoUpscaler(io.ComfyNode):
             raise RuntimeError(
                 f"Required LH2.6 model files are missing or invalid. "
                 f"DiT model: {dit_model}, VAE model: {vae_model}. "
-                "Place the reviewed files in ComfyUI/models/LH2.6/."
+                "Upload both reviewed files as UNet on RunningHub or place them in ComfyUI/models/LH2.6/."
             )
         
         try:
